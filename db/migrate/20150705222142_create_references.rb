@@ -7,6 +7,7 @@ class CreateReferences < ActiveRecord::Migration
       t.string :occupation
       t.string :phone
 
+      t.integer :application_id
       t.timestamps null: false
     end
   end

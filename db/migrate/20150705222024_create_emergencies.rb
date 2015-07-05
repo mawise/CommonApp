@@ -6,6 +6,7 @@ class CreateEmergencies < ActiveRecord::Migration
       t.string :relationship
       t.string :phone
 
+      t.integer :application_id
       t.timestamps null: false
     end
   end

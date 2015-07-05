@@ -6,6 +6,7 @@ class CreateDebts < ActiveRecord::Migration
       t.string :creditor_phone
       t.integer :monthly_payment
 
+      t.integer :application_id
       t.timestamps null: false
     end
   end

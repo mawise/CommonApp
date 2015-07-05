@@ -13,6 +13,7 @@ class CreateEmployers < ActiveRecord::Migration
       t.string :hr_manager
       t.string :hr_phone
 
+      t.integer :application_id
       t.timestamps null: false
     end
   end

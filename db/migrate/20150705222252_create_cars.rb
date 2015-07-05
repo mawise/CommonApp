@@ -6,6 +6,7 @@ class CreateCars < ActiveRecord::Migration
       t.integer :year
       t.string :license
 
+      t.integer :application_id
       t.timestamps null: false
     end
   end

@@ -11,6 +11,7 @@ class CreatePreviousAddresses < ActiveRecord::Migration
       t.string :agent_phone
       t.string :move_out_reason
 
+      t.integer :application_id
       t.timestamps null: false
     end
   end
