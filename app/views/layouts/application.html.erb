@@ -8,7 +8,15 @@
 </head>
 <body>
 
-<%= yield %>
+  <% flash[:errors] && flash[:errors].each do |message| %>
+    <p><%= message %></p>
+  <% end %>
+
+  <% flash[:messages] && flash[:messages].each do |message| %>
+    <p><%= message %></p>
+  <% end %>
+
+  <%= yield %>
 
 </body>
 </html>
