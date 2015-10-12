@@ -1,4 +1,4 @@
-class Api::PreviousAddressesController < ApplicationController
+class Api::PreviousAddressesController < ApiController
   def create
 
   end

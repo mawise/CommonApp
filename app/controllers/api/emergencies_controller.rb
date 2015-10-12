@@ -1,4 +1,4 @@
-class Api::EmergenciesController < ApplicationController
+class Api::EmergenciesController < ApiController
   def create
 
   end

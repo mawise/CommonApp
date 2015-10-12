@@ -1,4 +1,4 @@
-class Api::DebtsController < ApplicationController
+class Api::DebtsController < ApiController
   def create
 
   end

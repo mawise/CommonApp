@@ -1,4 +1,4 @@
-class Api::ReferencesController < ApplicationController
+class Api::ReferencesController < ApiController
   def create
 
   end

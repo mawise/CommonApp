@@ -1,4 +1,4 @@
-class Api::CarsController < ApplicationController
+class Api::CarsController < ApiController
   def create
 
   end

@@ -1,15 +1,22 @@
-class Api::ApplicationsController < ApplicationController
+class Api::ApplicationsController < ApiController
+  before_action :require_logged_in!
+
   def create
-    @application = Application.new(application_params)
+    @application = current_user.application.new(application_params)
   end
 
-  def show
-    @application = Application.find(params[:id])
+  def index
+    @application = current_user.application
     render json: @application
   end
 
   def destroy
-
+    @application = current_user.application
+    if @application.destroy
+      render json: @application
+    else
+      render json: @application.errors.full_messages
+    end
   end
 
   private
