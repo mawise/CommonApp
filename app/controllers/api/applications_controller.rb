@@ -7,7 +7,6 @@ class Api::ApplicationsController < ApiController
 
   def index
     @application = current_user.application
-    render json: @application
   end
 
   def destroy

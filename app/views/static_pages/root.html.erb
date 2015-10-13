@@ -1,4 +1,11 @@
-<%= javascript_include_tag 'application' %>
 <%= link_to 'Log out', session_url, method: :delete %>
 
 <div id='main'></div>
+<script>  
+  $(function () {
+    React.render(
+      React.createElement(Router, [], routes),
+      document.getElementById("main")
+    );
+  })
+</script>
