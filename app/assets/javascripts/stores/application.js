@@ -8,7 +8,7 @@
 
   window.ApplicationStore = $.extend({}, EventEmitter.prototype, {
     application: function () {
-      if(!_application) { return; }
+      if(!_application) { return null; }
       return $.extend(true, {}, _application);
     },
 

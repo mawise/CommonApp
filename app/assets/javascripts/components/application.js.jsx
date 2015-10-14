@@ -1,16 +1,18 @@
 ;window.Application = React.createClass({
-  _onChange: function () {
-    this.setState(this.getStateFromStore());
-  },
-
-  getStateFromStore: function () {
-    return { application: ApplicationStore.application() };
-  },
+  mixins: [React.addons.LinkedStateMixin],
 
   getInitialState: function () {
     return this.getStateFromStore();
   },
   
+  getStateFromStore: function () {
+    return ApplicationStore.application();
+  },
+
+  _onChange: function () {
+    this.setState(this.getStateFromStore());
+  },
+
   componentDidMount: function () {
     ApplicationStore.addChangeListener(this._onChange);
     ApiUtil.fetchApplication();
@@ -21,7 +23,7 @@
   },
 
   render: function () {
-    if(!this.state.application) { return <div></div>; }
+    if(!this.state) { return <div></div>; }
 
     return(
       <div>
@@ -31,57 +33,95 @@
           <hr></hr>
           <div className="row">
               <div className="col-md-3">
-                  <span className="display-label">Last Name </span>
-                  <span className="display-value">{this.state.application.last_name}</span>
+                  <Input
+                    displayName="Last Name" 
+                    name="last_name" 
+                    value={this.state.last_name}
+                    onEdit={this.setState.bind(this)}
+                  />
               </div>
               <div className="col-md-3">
-                  <span className="display-label">First Name </span>
-                  <span className="display-value">{this.state.application.first_name}</span>
+                  <Input
+                    displayName="First Name" 
+                    name="first_name" 
+                    value={this.state.first_name}
+                    onEdit={this.setState.bind(this)}
+                  />
               </div>
               <div className="col-md-3">
-                  <span className="display-label">Middle Name </span>
-                  <span className="display-value">{this.state.application.middle_name}</span>
+                  <Input
+                    displayName="Middle Name" 
+                    name="middle_name" 
+                    value={this.state.middle_name}
+                    onEdit={this.setState.bind(this)}
+                  />
               </div>
               <div className="col-md-3">
-                  <span className="display-label">Social Security Number </span>
-                  <span className="display-value">{this.state.application.social_security_number}</span>
+                  <Input
+                    displayName="Social Security Number" 
+                    name="social_security_number" 
+                    value={this.state.social_security_number}
+                    onEdit={this.setState.bind(this)}
+                  />
               </div>
           </div>
           <div className="row">
               <div className="col-md-6">
-                  <span className="display-label">Other Names </span>
-                  <span className="display-value">{this.state.application.other_names}</span>
+                  <Input
+                    displayName="Other Names" 
+                    name="other_names" 
+                    value={this.state.other_names}
+                    onEdit={this.setState.bind(this)}
+                  />
               </div>
               <div className="col-md-3">
-                  <span className="display-label">Work Phone </span>
-                  <span className="display-value">{this.state.application.work_phone}</span>
+                  <Input
+                    displayName="Work Phone" 
+                    name="work_phone" 
+                    value={this.state.work_phone}
+                    onEdit={this.setState.bind(this)}
+                  />
               </div>
               <div className="col-md-3">
-                  <span className="display-label">Home Phone </span>
-                  <span className="display-value">{this.state.application.home_phone}</span>
+                  <Input
+                    displayName="Home Phone" 
+                    name="home_phone" 
+                    value={this.state.home_phone}
+                    onEdit={this.setState.bind(this)}
+                  />
               </div>
           </div>
           <div className="row">
               <div className="col-md-3">
-                  <span className="display-label">Date of Birth </span>
-                  <span className="display-value">{this.state.application.date_of_birth}</span>
+                  <Input
+                    displayName="Date of Birth" 
+                    name="date_of_birth" 
+                    value={this.state.date_of_birth}
+                    onEdit={this.setState.bind(this)}
+                  />
               </div>
               <div className="col-md-6">
-                  <span className="display-label">Email </span>
-                  <span className="display-value">{this.state.application.email}</span>
+                  <Input
+                    displayName="Email" 
+                    name="email" 
+                    value={this.state.email}
+                    onEdit={this.setState.bind(this)}
+                  />
               </div>
               <div className="col-md-3">
-                  <span className="display-label">Mobile Phone </span>
-                  <span className="display-value">{this.state.application.mobile_phone}</span>
+                  <Input
+                    displayName="Mobile Phone" 
+                    name="mobile_phone" 
+                    value={this.state.mobile_phone}
+                    onEdit={this.setState.bind(this)}
+                  />
               </div>
           </div>
           <hr></hr>
-          {this.state.application.previous_addresses.map(function (adr, i) {
+          {this.state.previous_addresses.map(function (adr, i) {
               return <div key={i}>
                   <div className="row">
                       <div className="col-md-5">
-                          <span className="display-label">Previous Address </span>
-                          <span className="display-value">{adr.street_address}</span>
                       </div>
                       <div className="col-md-3">
                           <span className="display-label">City </span>
@@ -122,7 +162,7 @@
                   </div>
               </div>
           })}
-          {this.state.application.other_occupants && this.state.application.other_occupants.map(function (occupant, i) {
+          {this.state.other_occupants && this.state.other_occupants.map(function (occupant, i) {
               return <div key={i}>
                   <div className="row">
                       <div className = "col-md-6">
@@ -135,33 +175,33 @@
           <div className="row">
               <div className="col-md-1">
                   <span className="display-label">Pets? </span>
-                  <span className="display-value">{this.state.application.pet_status ? "Yes" : "No"}</span>
+                  <span className="display-value">{this.state.pet_status ? "Yes" : "No"}</span>
               </div>
               <div className="col-md-5">
                   <span className="display-label">Describe </span>
-                  <span className="display-value">{this.state.application.pet_describe}</span>
+                  <span className="display-value">{this.state.pet_describe}</span>
               </div>
               <div className="col-md-1">
                   <span className="display-label">Waterbed? </span>
-                  <span className="display-value">{this.state.application.waterbed_status? "Yes" : "No"}</span>
+                  <span className="display-value">{this.state.waterbed_status? "Yes" : "No"}</span>
               </div>
               <div className="col-md-5">
                   <span className="display-label">Describe </span>
-                  <span className="display-value">{this.state.application.waterbed_describe}</span>
+                  <span className="display-value">{this.state.waterbed_describe}</span>
               </div>
           </div>
           <div className="row">
               <div className="col-md-3">
                   <span className="display-label">Gross Income </span>
-                  <span className="display-value">{this.state.application.current_income}</span>
+                  <span className="display-value">{this.state.current_income}</span>
               </div>
               <div className="col-md-3">
                   <span className="display-label">Per </span>
-                  <span className="display-value">{this.state.application.current_income_per}</span>
+                  <span className="display-value">{this.state.current_income_per}</span>
               </div>
           </div>
           <hr></hr>
-          {this.state.application.employers.map(function (employer, i) {
+          {this.state.employers.map(function (employer, i) {
               return <div key={i}>
                   <div className="row">
                       <div className="col-md-4">
@@ -208,7 +248,7 @@
               </div>
           })}
           <hr></hr>
-          {this.state.application.other_incomes && this.state.application.other_incomes.map(function (income, i) {
+          {this.state.other_incomes && this.state.other_incomes.map(function (income, i) {
               return <div key={i} className="row">
                   <div className="col-md-6">
                       <span className="display-label">Other Income Source </span>
@@ -224,7 +264,7 @@
                   </div>
               </div>
           })}        
-          {this.state.application.banks.map(function (bank, i) {
+          {this.state.banks.map(function (bank, i) {
               return <div key={i} className="row">
                   <div className="col-md-3">
                       <span className="display-label">Bank Name </span>
@@ -245,7 +285,7 @@
                   <span className="display-label">List of all financial obligations</span>
               </div>
           </div>
-          {this.state.application.debts.map(function (debt, i) {
+          {this.state.debts.map(function (debt, i) {
               return <div key={i} className="row">
                   <div className="col-md-3">
                       <span className="display-label">Name of Creditor </span>
@@ -265,7 +305,7 @@
                   </div>
               </div>
           })}
-          {this.state.application.emergencies.map(function (emergency, i) {        
+          {this.state.emergencies.map(function (emergency, i) {        
               return <div key={i} className="row">
                   <div className="col-md-3">
                       <span className="display-label">Emergency Contact </span>
@@ -285,7 +325,7 @@
                   </div>
               </div>
           })}
-          {this.state.application.references.map(function (reference, i) {        
+          {this.state.references.map(function (reference, i) {        
               return <div key={i} className="row">
                   <div className="col-md-2">
                       <span className="display-label">Personal Ref </span>
@@ -309,7 +349,7 @@
                   </div>
               </div>
           })}       
-          {this.state.application.cars.map(function (car, i) {        
+          {this.state.cars.map(function (car, i) {        
               return <div key={i} className="row">
                   <div className="col-md-3">
                       <span className="display-label">Automobile Make </span>
@@ -332,17 +372,17 @@
           <div className="row">
               <div className="col-md-6">
                   <span className="display-label">Have you ever filed for bankrupcy? </span>
-                  <span className="display-value">{this.state.application.bankruptcy ? "Yes" : "No"}</span>
+                  <span className="display-value">{this.state.bankruptcy ? "Yes" : "No"}</span>
               </div>
               <div className="col-md-6">
                   <span className="display-label">Have you ever been evicted or asked to move? </span>
-                  <span className="display-value">{this.state.application.eviction ? "Yes" : "No"}</span>
+                  <span className="display-value">{this.state.eviction ? "Yes" : "No"}</span>
               </div>
           </div>
           <div className="row">
               <div className="col-md-12">
                   <span className="display-label">Have you ever been convicted of selling, distributing, or manufacturing illegal drugs? </span>
-                  <span className="display-value">{this.state.application.drugs ? "Yes" : "No"}</span>
+                  <span className="display-value">{this.state.drugs ? "Yes" : "No"}</span>
               </div>
           </div>
           <hr></hr>
