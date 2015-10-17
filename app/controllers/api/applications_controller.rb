@@ -1,12 +1,21 @@
 class Api::ApplicationsController < ApiController
   before_action :require_logged_in!
 
+  def index
+    @application = current_user.application
+  end
+
   def create
     @application = current_user.application.new(application_params)
   end
 
-  def index
+  def update
     @application = current_user.application
+    if @application.update(application_params)
+      render json: @application
+    else
+      render json: @application.errors.full_messages, status: 422
+    end
   end
 
   def destroy
@@ -21,7 +30,7 @@ class Api::ApplicationsController < ApiController
   private
 
   def application_params
-    params.require(:application).allow(
+    params.require(:application).permit(
       :last_name,
       :first_name,
       :middle_name,

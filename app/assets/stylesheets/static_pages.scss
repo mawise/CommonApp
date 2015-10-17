@@ -2,6 +2,30 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.notifications {
+  position: absolute;
+  left: 100px;
+  top: 53px;
+  list-style: none;
+}
+
+.error {
+  position: absolute;
+}
+
+.show {
+  opacity: 1;
+}
+
+.no-show {
+  opacity: 0;
+}
+
+.fade {
+  opacity: 0;
+  transition-duration: 1s;
+}
+
 input {
   font-weight: normal;
 }

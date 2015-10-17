@@ -1,10 +1,25 @@
 ;window.ApiUtil = {
   fetchApplication: function () {
     $.ajax({
-      url: "api/applications/",
+      url: "api/applications",
       success: function (application) {
         ApiActions.receiveApplication(application);
       }
     });
-  }  
+  },  
+
+  saveApplication: function (application) {
+    var id = application.id;
+    $.ajax({
+      url: "api/applications/" + id,
+      method: "PUT",
+      data: { application: application },
+      success: function (application) { 
+        ApiActions.receiveApplication(application, ["Application saved"]);
+      },
+      error: function (errors) {
+        ApiActions.receiveErrors(JSON.parse(errors.responseText));
+      }
+    });
+  }
 };

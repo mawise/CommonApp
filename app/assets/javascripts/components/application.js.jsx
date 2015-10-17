@@ -9,24 +9,50 @@
     return ApplicationStore.application();
   },
 
-  _onChange: function () {
-    this.setState(this.getStateFromStore());
+  _saveApplication: function () {
+    this.setState({ errors: undefined, notifications: ["Saving..."], errorClass: "no-show", notificationClass: "show" });
+    ApiUtil.saveApplication(this.state);
+  },
+
+  _onError: function (errors) {
+    this.setState({ errors: errors, errorClass: "show", notificationClass: "no-show" });
+  },
+
+  _onSync: function (notifications) {
+    this.setState($.extend(
+      {}, 
+      this.getStateFromStore(), 
+      { notifications: notifications, notificationClass: "show" }
+    ));
+    setTimeout(function () {
+      this.setState({ notificationClass: "fade" });
+    }.bind(this), 1000);
   },
 
   componentDidMount: function () {
-    ApplicationStore.addChangeListener(this._onChange);
+    ApplicationStore.addChangeListener(this._onSync);
+    ApplicationStore.addErrorListener(this._onError);
     ApiUtil.fetchApplication();
   },
 
   componentWillUnmount: function () {
-    ApplicationStore.removeChangeListener(this._onChange);
+    ApplicationStore.removeChangeListener(this._onSync);
+    ApplicationStore.removeErrorListener(this._onError);
   },
 
   render: function () {
     if(!this.state) { return <div></div>; }
-
+    
     return(
       <div>
+          <ul>{this.state.errors && this.state.errors.map(function (message, i) {
+              return <li key={i}>{message}</li>;
+          })}</ul>
+          <Notifications 
+            notifications={this.state.notifications} 
+            className={this.state.notificationClass} 
+          />
+          <button onClick={this._saveApplication}>Save Changes</button>
           <div className="row">
               <div className="col-md-12 text-center h2">Application To Rent</div>
           </div>
@@ -36,32 +62,28 @@
                   <Input
                     displayName="Last Name" 
                     name="last_name" 
-                    value={this.state.last_name}
-                    onEdit={this.setState.bind(this)}
+                    form={this}
                   />
               </div>
               <div className="col-md-3">
                   <Input
                     displayName="First Name" 
                     name="first_name" 
-                    value={this.state.first_name}
-                    onEdit={this.setState.bind(this)}
+                    form={this}
                   />
               </div>
               <div className="col-md-3">
                   <Input
                     displayName="Middle Name" 
                     name="middle_name" 
-                    value={this.state.middle_name}
-                    onEdit={this.setState.bind(this)}
+                    form={this}
                   />
               </div>
               <div className="col-md-3">
                   <Input
                     displayName="Social Security Number" 
                     name="social_security_number" 
-                    value={this.state.social_security_number}
-                    onEdit={this.setState.bind(this)}
+                    form={this}
                   />
               </div>
           </div>
@@ -70,24 +92,21 @@
                   <Input
                     displayName="Other Names" 
                     name="other_names" 
-                    value={this.state.other_names}
-                    onEdit={this.setState.bind(this)}
+                    form={this}
                   />
               </div>
               <div className="col-md-3">
                   <Input
                     displayName="Work Phone" 
                     name="work_phone" 
-                    value={this.state.work_phone}
-                    onEdit={this.setState.bind(this)}
+                    form={this}
                   />
               </div>
               <div className="col-md-3">
                   <Input
                     displayName="Home Phone" 
                     name="home_phone" 
-                    value={this.state.home_phone}
-                    onEdit={this.setState.bind(this)}
+                    form={this}
                   />
               </div>
           </div>
@@ -96,24 +115,21 @@
                   <Input
                     displayName="Date of Birth" 
                     name="date_of_birth" 
-                    value={this.state.date_of_birth}
-                    onEdit={this.setState.bind(this)}
+                    form={this}
                   />
               </div>
               <div className="col-md-6">
                   <Input
                     displayName="Email" 
                     name="email" 
-                    value={this.state.email}
-                    onEdit={this.setState.bind(this)}
+                    form={this}
                   />
               </div>
               <div className="col-md-3">
                   <Input
                     displayName="Mobile Phone" 
                     name="mobile_phone" 
-                    value={this.state.mobile_phone}
-                    onEdit={this.setState.bind(this)}
+                    form={this}
                   />
               </div>
           </div>
@@ -409,6 +425,7 @@
                   </ol>
               </div>
           </div>
+          <button onClick={this._saveApplication}>Save Changes</button>
       </div>
     );
   }
