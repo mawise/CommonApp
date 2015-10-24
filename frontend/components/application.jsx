@@ -1,4 +1,8 @@
-;window.Application = React.createClass({
+var React = require('react');
+var ApiUtil = require('../util/api_util');
+var Input = require('./input.jsx');
+
+module.exports = React.createClass({
   mixins: [React.addons.LinkedStateMixin],
 
   getInitialState: function () {

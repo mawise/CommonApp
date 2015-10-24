@@ -1,4 +1,7 @@
-;window.ApiUtil = {
+var ApiActions = require('../actions/api_actions');
+var $ = require('jquery');
+
+module.exports = {
   fetchApplication: function () {
     $.ajax({
       url: "api/applications",

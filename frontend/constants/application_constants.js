@@ -1,4 +1,4 @@
-;window.ApplicationConstants = {
+module.exports = {
   APPLICATION_RECEIVED: "APPLICATION_RECEIVED",
   ERRORS_RECEIVED: "ERRORS_RECEIVED"
 };

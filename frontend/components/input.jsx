@@ -1,4 +1,6 @@
-;window.Input = React.createClass({
+var React = require('react');
+
+module.exports = React.createClass({
   mixins: [React.addons.LinkedStateMixin],
 
   getInitialState: function () {

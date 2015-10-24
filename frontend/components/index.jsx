@@ -1,4 +1,8 @@
-;window.Index = React.createClass({
+var React = require('react');
+var Link = requier('react-router').Link;
+var Application = require('./application.jsx');
+
+module.exports = React.createClass({
   render: function () {
     return (
       <div>
