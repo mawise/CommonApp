@@ -11,6 +11,8 @@
 
 .error {
   position: absolute;
+  top: 25px;
+  color: red;
 }
 
 .show {
@@ -26,8 +28,13 @@
   transition-duration: 1s;
 }
 
+.error-label {
+  color: red;
+}
+
 input {
   font-weight: normal;
+  color: black;
 }
 
 input.hide-edit {

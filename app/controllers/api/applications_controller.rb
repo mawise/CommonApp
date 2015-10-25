@@ -14,7 +14,7 @@ class Api::ApplicationsController < ApiController
     if @application.update(application_params)
       render json: @application
     else
-      render json: @application.errors.full_messages, status: 422
+      render json: @application.errors, status: 422
     end
   end
 

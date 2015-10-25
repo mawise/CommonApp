@@ -7,31 +7,36 @@ module.exports = React.createClass({
   mixins: [ReactAddons.LinkedStateMixin],
 
   getInitialState: function () {
-    return this.getStateFromStore();
-  },
-  
-  getStateFromStore: function () {
     return ApplicationStore.application();
   },
 
-  _saveApplication: function () {
-    this.setState({ errors: undefined, notifications: ["Saving..."], errorClass: "no-show", notificationClass: "show" });
+  _sendSave: function () {
+    this.setState({ 
+      notifications: ["Saving..."], 
+      notificationClass: "show" 
+    });
     ApiUtil.saveApplication(this.state);
-  },
-
-  _onError: function (errors) {
-    this.setState({ errors: errors, errorClass: "show", notificationClass: "no-show" });
   },
 
   _onSync: function (notifications) {
     this.setState($.extend(
       {}, 
-      this.getStateFromStore(), 
+      ApplicationStore.application(), 
       { notifications: notifications, notificationClass: "show" }
     ));
     setTimeout(function () {
       this.setState({ notificationClass: "fade" });
     }.bind(this), 1000);
+  },
+
+  _onError: function () {
+    this.setState({ 
+      notifications: ["Fix errors and try again"],
+      notificationClass: "show" 
+    });
+    setTimeout(function () {
+      this.setState({ notificationClass: "fade" });
+    }.bind(this), 1000);    
   },
 
   componentDidMount: function () {
@@ -57,7 +62,7 @@ module.exports = React.createClass({
             notifications={this.state.notifications} 
             className={this.state.notificationClass} 
           />
-          <button onClick={this._saveApplication}>Save Changes</button>
+          <button onClick={this._sendSave}>Save Changes</button>
           <div className="row">
               <div className="col-md-12 text-center h2">Application To Rent</div>
           </div>
@@ -430,7 +435,7 @@ module.exports = React.createClass({
                   </ol>
               </div>
           </div>
-          <button onClick={this._saveApplication}>Save Changes</button>
+          <button onClick={this._sendSave}>Save Changes</button>
       </div>
     );
   }

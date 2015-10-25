@@ -1,4 +1,5 @@
 var ApiActions = require('../actions/api_actions');
+var FrontendActions = require('../actions/frontend_actions');
 
 module.exports = {
   logOut: function () {
@@ -21,9 +22,10 @@ module.exports = {
   },  
 
   saveApplication: function (application) {
-    var id = application.id;
+    FrontendActions.beginSave();
+
     $.ajax({
-      url: "api/applications/" + id,
+      url: "api/applications/" + application.id,
       method: "PUT",
       data: { application: application },
       success: function (application) { 
