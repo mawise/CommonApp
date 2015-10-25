@@ -1,9 +1,10 @@
-var React = require('react');
+var ReactAddons = require('react-addons');
 var ApiUtil = require('../util/api_util');
 var Input = require('./input.jsx');
+var Notifications = require('./notifications.jsx');
 
 module.exports = React.createClass({
-  mixins: [React.addons.LinkedStateMixin],
+  mixins: [ReactAddons.LinkedStateMixin],
 
   getInitialState: function () {
     return this.getStateFromStore();

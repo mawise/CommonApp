@@ -1,7 +1,16 @@
 var ApiActions = require('../actions/api_actions');
-var $ = require('jquery');
 
 module.exports = {
+  logOut: function () {
+    $.ajax({
+      url: "session",
+      method: "delete",
+      success: function () {
+        location = 'session/new';
+      }
+    });
+  },
+
   fetchApplication: function () {
     $.ajax({
       url: "api/applications",

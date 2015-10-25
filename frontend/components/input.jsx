@@ -1,7 +1,8 @@
-var React = require('react');
+var ReactAddons = require('react-addons');
+var Error = require('./error.jsx');
 
 module.exports = React.createClass({
-  mixins: [React.addons.LinkedStateMixin],
+  mixins: [ReactAddons.LinkedStateMixin],
 
   getInitialState: function () {
     var state = {};

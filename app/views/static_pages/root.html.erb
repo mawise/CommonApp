@@ -1,10 +1,8 @@
-<%= link_to 'Log out', session_url, method: :delete %>
-
 <div id='main'></div>
 <script>  
   $(function () {
-    React.render(
-      React.createElement(Router, [], routes),
+    ReactDOM.render(
+      React.createElement(View),
       document.getElementById("main")
     );
   })

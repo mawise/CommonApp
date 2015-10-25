@@ -1,6 +1,5 @@
-var $ = require('jquery');
-var EventEmitter = require('flux').EventEmitter;
-var ApplicationConstants = require('./constants/application_constants');
+var EventEmitter = require('events').EventEmitter;
+var ApplicationConstants = require('../constants/application_constants');
 
 var CHANGE_EVENT = "application_change";
 var ERROR_EVENT = "error";
@@ -10,7 +9,7 @@ var resetApplication = function (application) {
   _application = application;
 };
 
-window.ApplicationStore = $.extend({}, EventEmitter.prototype, {
+module.exports = $.extend({}, EventEmitter.prototype, {
   application: function () {
     if(!_application) { return null; }
     return $.extend(true, {}, _application);
