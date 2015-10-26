@@ -1,3 +1,44 @@
 // Place all the styles related to the StaticPages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.notifications {
+  position: absolute;
+  left: 100px;
+  top: 53px;
+  list-style: none;
+}
+
+.error {
+  position: absolute;
+  top: 25px;
+  color: red;
+}
+
+.show {
+  opacity: 1;
+}
+
+.no-show {
+  opacity: 0;
+}
+
+.fade {
+  opacity: 0;
+  transition-duration: 1s;
+}
+
+.error-label {
+  color: red;
+}
+
+input {
+  font-weight: normal;
+  color: black;
+}
+
+input.hide-edit {
+  border-style: solid;
+  border-color: white;
+  outline: none;
+}

@@ -1,3 +1,9 @@
-<%= link_to 'Log out', session_url, method: :delete %>
-
-<div id='main'>Hi!</div>
+<div id='main'></div>
+<script>  
+  $(function () {
+    ReactDOM.render(
+      React.createElement(View),
+      document.getElementById("main")
+    );
+  })
+</script>

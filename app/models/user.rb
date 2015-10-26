@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
   validates :password_digest, presence: true
   validates :password, presence: { length: 8, allow_nil: true }
 
+  has_one :application, dependent: :destroy
+
   attr_reader :password
 
   before_validation :ensure_session_token
